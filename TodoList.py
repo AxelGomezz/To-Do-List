@@ -1,5 +1,8 @@
 #To-Do List project
 from operator import index
+import json
+
+
 
 #Variables
 Task = []
@@ -43,8 +46,28 @@ def changeStatus():
     selector = int(input("\n|-- Which task you wan change its Status? --|\nEnter number of task you wan change status: "))
     Tasks[selector-1][1] = input("What is the new status of this stask: ")
 
+"""
+def saveTasks():
+    with open("tasks.json", "w") as file:
+        json.dump(Tasks, file, indent=4)
+
+def loadTasks():
+    try:
+        with open("tasks.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+    except json.JSONDecodeError:
+        print("Error: Damaged file or not JSON valid ")
+        return[]
 #MAIN
+tasks = loadTasks()"""
+
+showTasks()
+
 createTask()
 deleteTask()
 changeStatus()
-showTasks()
+
+
+#saveTasks()
