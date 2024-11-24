@@ -1,4 +1,5 @@
 #To-Do List project
+from operator import index
 
 #Variables
 Task = []
@@ -29,8 +30,15 @@ def showTasks():
         print("To do: ",t[0])
         print("Estate: ",t[1])
         y+=1
-#def deleteTask():
+
+def deleteTask():
+    print("\nWe recommending look yours task first before delete something")
+    showTasks()
+    selector = int(input("--- Which one you wan delete? ---\nEnter number of task you wan delete: "))
+    Tasks.pop(index(selector-1))
 
 #MAIN
 createTask()
+showTasks()
+deleteTask()
 showTasks()
