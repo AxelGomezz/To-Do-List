@@ -1,12 +1,12 @@
 #To-Do List project
-from json import JSONDecodeError
 from operator import index
 import json
 
 
 #Variables
 Task = []
-Tasks =[]
+Tasks = []
+operation = 0
 
 #Functions
 def createTask():
@@ -25,6 +25,7 @@ def createTask():
         follow = int(input("\nDo You need add a new task?: \nPress [1] for YES\nPress [0] for NO: "))
         if follow != 1:
             break
+    saveTasks()
 
 
 def showTasks():
@@ -34,13 +35,15 @@ def showTasks():
         print("To do: ",t[0])
         print("Estate: ",t[1])
         y+=1
-
+    if Tasks == []:
+        print("\nYou dont have any task!\n")
 
 def deleteTask():
     print("\n|-- We recommending look yours task first before delete something --|")
     showTasks()
     selector = int(input("\n|-- Which one you wan delete? --|\nEnter number of task you wan delete: "))
     Tasks.pop(index(selector-1))
+    saveTasks()
 
 
 def changeStatus():
@@ -50,6 +53,7 @@ def changeStatus():
     showTasks()
     selector = int(input("\n|-- Which task you wan change its Status? --|\nEnter number of task you wan change status: "))
     Tasks[selector-1][1] = input("What is the new status of this stask: ")
+    saveTasks()
 
 
 def saveTasks():
@@ -68,14 +72,30 @@ def loadTasks():
         return[]
 
 
+def showMenu():
+    print("---What do you want?---")
+    operation = int(input("[1] - Create a new task\n"
+                          "[2] - Show your Tasks\n"
+                          "[3] - Change status of some task\n"
+                          "[4] - Delete Task\n"
+                          "[5] - Exit: "))
+    return operation
+
 #MAIN
-tasks = loadTasks()
+print("[WELCOME TO YOU TO DO LIST]")
+Tasks = loadTasks()
+operation = showMenu()
 
-showTasks()
+while operation != 5:
+    #Tasks = loadTasks()
+    if operation == 1:
+        createTask()
+    if operation == 2:
+        showTasks()
+    if operation == 3:
+        changeStatus()
+    if operation == 4:
+        deleteTask()
+    operation = showMenu()
 
-createTask()
-deleteTask()
-changeStatus()
-
-
-#saveTasks()
+print("See you later!")
