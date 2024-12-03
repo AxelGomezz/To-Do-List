@@ -22,8 +22,16 @@ def createTask():
 
         Task.clear() #clear task list for add new task list in Tasks (it contain all tasks)
 
-        follow = int(input("\nDo You need add a new task?: \nPress [1] for YES\nPress [0] for NO: ")) # asks the user if they want to add a new task
-        print("\n")
+        while True: #Bucle for handling exceptions to question for continue or not
+            try:
+                follow = int(input("\nDo You need add a new task?: \nPress [1] for YES\nPress [0] for NO: ")) # asks the user if they want to add a new task
+                print("\n")
+                if follow in [0,1]:
+                    break
+                else:
+                    print("[",follow,"] doesn't exist. Please enter a valid option")
+            except ValueError:
+                print("\nError: Invalid value")
         if follow != 1:
             break
     saveTasks()
