@@ -11,9 +11,9 @@ operation = 0
 #Functions
 def createTask():
     follow = 1
-#Create a bucle to repit while "do yo want add new task" its say "okey see you later" or similar thinks
+#Create a bucle to repit while "do you want add new task" its say "okey see you later" or similar thinks
     while follow == 1:
-        newTask = input("Enter your new Task!: ")
+        newTask = input("\nEnter your new Task!: ")
         Task.append(newTask) #add newTask in a new task list
 
         state = input("\n|-- We recommend use 'Pendient' or 'completed' word. --|\nEstate of your task?: ")
@@ -22,7 +22,8 @@ def createTask():
 
         Task.clear() #clear task list for add new task list in Tasks (it contain all tasks)
 
-        follow = int(input("\nDo You need add a new task?: \nPress [1] for YES\nPress [0] for NO: "))
+        follow = int(input("\nDo You need add a new task?: \nPress [1] for YES\nPress [0] for NO: ")) # asks the user if they want to add a new task
+        print("\n")
         if follow != 1:
             break
     saveTasks()
@@ -33,7 +34,7 @@ def showTasks():
     for t in Tasks:
         print("\n    Task N",y,"   ")
         print("To do: ",t[0])
-        print("Estate: ",t[1])
+        print("Estate: ",t[1],"\n")
         y+=1
     if Tasks == []:
         print("\nYou dont have any task!\n")
@@ -42,6 +43,7 @@ def deleteTask():
     print("\n|-- We recommending look yours task first before delete something --|")
     showTasks()
     selector = int(input("\n|-- Which one you wan delete? --|\nEnter number of task you wan delete: "))
+    print("\n")
     Tasks.pop(index(selector-1))
     saveTasks()
 
@@ -74,20 +76,28 @@ def loadTasks():
 
 def showMenu():
     print("---What do you want?---")
-    operation = int(input("[1] - Create a new task\n"
+    while True:
+        try:
+            operation = int(input("[1] - Create a new task\n"
                           "[2] - Show your Tasks\n"
                           "[3] - Change status of some task\n"
                           "[4] - Delete Task\n"
                           "[5] - Exit: "))
+            if operation in [1, 2, 3, 4, 5]: #This evaluate the user's choice
+                break
+            else:
+                print("\n[",operation,"] doesn't exist. Please enter a valid option.\n")
+        except ValueError:
+            print("\n[Error: please enter a valid option]\n")
     return operation
 
 #MAIN
 print("[WELCOME TO YOU TO DO LIST]")
-Tasks = loadTasks()
+Tasks = loadTasks() #Load the user's Tasks
 operation = showMenu()
 
 while operation != 5:
-    #Tasks = loadTasks()
+
     if operation == 1:
         createTask()
     if operation == 2:
@@ -96,6 +106,7 @@ while operation != 5:
         changeStatus()
     if operation == 4:
         deleteTask()
+
     operation = showMenu()
 
 print("See you later!")
