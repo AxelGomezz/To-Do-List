@@ -52,20 +52,30 @@ def deleteTask():
     if Tasks == []: #in case of the user don't have tasks
         print("\nYou don't have any task for delete!\n")
     else:
-        print("\n|-- We recommending look yours task first before delete something --|")
-        showTasks()
-        amount = len(Tasks)
+        #print("\n|-- We recommending look yours task first before delete something --|")
+        #showTasks()
+        #amount = len(Tasks)
         while True:
+            amount = len(Tasks)
             try:
+                print("\n|-- We recommending look yours task first before delete something --|")
+                showTasks()
                 selector = int(input("\n|-- Which one you wan delete? --|\nEnter number of task you want delete: "))
                 if selector < 1 or selector > amount:
-                    print("\nYou don't have any task with this number [",selector,"]\nPlease enter a valid number of task")
+                    print("\n=======================================")
+                    print(" ❌ You don't have any task with this number [",selector,"]\n ⚠️ Please enter a valid number of task")
+                    print("=======================================")
                 else:
                     Tasks.pop(index(selector-1))
+                    print("\n ✔️ Task number",selector,"has been deleted\n")
                     saveTasks()
                     break
             except ValueError:
-                print("\nError: Invalid value")
+                print("\n=================================")
+                print("⚠️ Error: Invalid value \n(Please enter a number of task")
+                print("=================================")
+
+
 
 
 
