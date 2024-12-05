@@ -60,7 +60,7 @@ def deleteTask():
             try:
                 print("\n|-- We recommending look yours task first before delete something --|")
                 showTasks()
-                selector = int(input("\n|-- Which one you wan delete? --|\nEnter number of task you want delete: "))
+                selector = int(input("\n|-- Which one you want delete? --|\nEnter number of task you want delete: "))
                 if selector < 1 or selector > amount:
                     print("\n=======================================")
                     print(" ❌ You don't have any task with this number [",selector,"]\n ⚠️ Please enter a valid number of task")
@@ -72,21 +72,37 @@ def deleteTask():
                     break
             except ValueError:
                 print("\n=================================")
-                print("⚠️ Error: Invalid value \n(Please enter a number of task")
+                print("⚠️ Error: Invalid value \n(Please enter a number of task)")
                 print("=================================")
-
-
-
 
 
 def changeStatus():
 
-    # add solution in case of dont have anyone list. e.g: 0 tasks
-    print("\n|-- We recommending look yours task first before delete something --|")
-    showTasks()
-    selector = int(input("\n|-- Which task you wan change its Status? --|\nEnter number of task you wan change status: "))
-    Tasks[selector-1][1] = input("What is the new status of this stask: ")
-    saveTasks()
+    if Tasks == []:
+        print("\nYou don't have any task for change status!\nGo to 'Create a new task' section!\n")
+    else:
+        while True:
+            amount = len(Tasks)
+            try:
+                print("\n|-- We recommending look yours task first before change something --|")
+                showTasks()
+                selector = int(input("\n|-- Which task you want change its Status? --|\nEnter number of task you want change status: "))
+                if selector < 1 or selector > amount:
+                    print("\n=======================================")
+                    print(" ❌ You don't have any task with this number [", selector,"]\n ⚠️ Please enter a valid number of task")
+                    print("=======================================")
+                else:
+                    Tasks[selector-1][1] = input("What is the new status of this stask: ")
+                    saveTasks()
+                    print("\n ✔️ Task number",selector,"has been modified\n")
+                    break
+            except ValueError:
+                print("\n=================================")
+                print("⚠️ Error: Invalid value \n(Please enter a number of task)")
+                print("=================================")
+
+
+
 
 
 def saveTasks():
@@ -140,4 +156,4 @@ while operation != 5:
 
     operation = showMenu()
 
-print("See you later!")
+print("\nSee you later!")
